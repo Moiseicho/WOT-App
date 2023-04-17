@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: website-checker
-        image: niki4a/website-checker:latest # Replace with your Docker image repository and tag
+        image: niki4a/website-checker:latest
         ports:
         - containerPort: 80
