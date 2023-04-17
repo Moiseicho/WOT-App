@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: website-checker-service
+spec:
+  selector:
+    app: website-checker
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-checker
+spec:
+  selector:
+    matchLabels:
+      app: website-checker
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: website-checker
+    spec:
+      containers:
+      - name: website-checker
+        image: niki4a/website-checker-3.0:latest
+        ports:
+        - containerPort: 5000
