@@ -17,8 +17,8 @@ class App():
         
         for counter in range(self.listbox.size()):
             if counter == index:
-                self.checkers[counter].skip()
-                isDown = self.checkers[index].getStatus() == "DOWN"
+                
+                isDown = "DOWN" # Add the stuff here
                 now = datetime.datetime.now()
                 current_time = now.strftime("%Y-%m-%d %H:%M:%S")
                 website = self.listbox.get(0).split(' Last update: ')[0]
@@ -36,8 +36,7 @@ class App():
     def update(self):
         for counter in range(self.listbox.size()):
             
-            self.checkers[counter].skip()
-            isDown = self.checkers[counter].getStatus() == "DOWN"
+            isDown = "DOWN" # Add stuff here
             now = datetime.datetime.now()
             current_time = now.strftime("%Y-%m-%d %H:%M:%S")
             website = self.listbox.get(0).split(' Last update: ')[0]
@@ -58,14 +57,6 @@ class App():
                     "https://www.example.com/sarah",
                     "https://www.example.com/david"}
 
-        self.checkers = []
-        id = 0
-        for website in self.websites:
-            self.checker = WebsiteChecker.WebsiteChecker(website, 10, self, id)
-            id += 1
-            self.checkers.append(self.checker)
-            self.checker.start()
-
         # Create Tkinter window
         self.window = tk.Tk()
         self.window.title("List of Websites")
@@ -77,11 +68,10 @@ class App():
 
         height = len(self.websites)
         self.listbox.config(height=height)
-        time.sleep(2)
         index = 0
         for website in self.websites:
             # Check if the website is online - KRUMAK and put it in a variable
-            isDown = self.checkers[index].getStatus() == "DOWN"
+            isDown ="DOWN" # Add stuff here
             index += 1
             now = datetime.datetime.now()
             current_time = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -110,6 +100,3 @@ class App():
     def run(self):
         self.window.mainloop()
         
-    def end(self):
-        for checker in self.checkers:
-            checker.stop()
