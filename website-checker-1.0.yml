@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
       - name: website-checker
-        image: niki4a/website-checker-3.0:latest
+        image: niki4a/website-checker-4.0:latest
         ports:
         - containerPort: 5000
