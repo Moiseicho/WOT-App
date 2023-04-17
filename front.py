@@ -14,11 +14,6 @@ class App():
         webbrowser.open_new_tab(website)
 
     def updateSingle(self, index):
-        website_id = list(self.websites.keys())[index]
-        website = self.websites[website_id]['website']
-        response = requests.get('http://localhost:5000/websites/' + str(website_id)).json()
-        self.websites[website_id]['status'] = response['status']
-
         isDown = self.websites[website_id]['status'] == 'DOWN'
         now = datetime.datetime.now()
         current_time = now.strftime("%Y-%m-%d %H:%M:%S")
