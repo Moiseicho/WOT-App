@@ -12,6 +12,7 @@ class WebsiteChecker(threading.Thread):
         self.front = front
         self.id = id
         self.stop_event = threading.Event()
+        self.skip_event = threading.Event()
     def check_website(self):
         try:
             response = requests.head(self.website, timeout=5)
@@ -23,16 +24,16 @@ class WebsiteChecker(threading.Thread):
             self.status = "DOWN"
 
     def run(self):
-        while not self.stop_event:
+        while not self.stop_event.is_set():
             self.check_website()
-            
-            try:
-                time.sleep(self.interval)
-            except:
-                self.running = False
-    
+            self.skip_event.wait(self.interval)
+                
     def getStatus(self):
         return self.status
     
     def stop(self):
         self.stop_event.set()
+        self.skip_event.set()
+        
+    def skip(self):
+        self.skip_event.set()

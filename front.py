@@ -17,7 +17,7 @@ class App():
         
         for counter in range(self.listbox.size()):
             if counter == index:
-                # Check if the website is online - KRUMAK and put it in a variable
+                self.checkers[counter].skip()
                 isDown = self.checkers[index].getStatus() == "DOWN"
                 now = datetime.datetime.now()
                 current_time = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -36,6 +36,7 @@ class App():
     def update(self):
         for counter in range(self.listbox.size()):
             
+            self.checkers[counter].skip()
             isDown = self.checkers[counter].getStatus() == "DOWN"
             now = datetime.datetime.now()
             current_time = now.strftime("%Y-%m-%d %H:%M:%S")
