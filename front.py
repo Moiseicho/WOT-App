@@ -3,7 +3,7 @@ import webbrowser
 import random
 import datetime
 import WebsiteChecker
-
+import time
 
 class App():
     # Define function to open web browser
@@ -35,9 +35,6 @@ class App():
 
     def update(self):
         for counter in range(self.listbox.size()):
-            
-            for checker in self.checkers:
-                checker.check_website()
             
             isDown = self.checkers[counter].getStatus() == "DOWN"
             now = datetime.datetime.now()
@@ -79,11 +76,12 @@ class App():
 
         height = len(self.websites)
         self.listbox.config(height=height)
-
-
+        time.sleep(2)
+        index = 0
         for website in self.websites:
             # Check if the website is online - KRUMAK and put it in a variable
-            isDown = random.choice([True, False])
+            isDown = self.checkers[index].getStatus() == "DOWN"
+            index += 1
             now = datetime.datetime.now()
             current_time = now.strftime("%Y-%m-%d %H:%M:%S")
             self.listbox.insert(tk.END, website + " Last update: " + current_time)
@@ -111,4 +109,6 @@ class App():
     def run(self):
         self.window.mainloop()
         
-    
+    def end(self):
+        for checker in self.checkers:
+            checker.stop()
