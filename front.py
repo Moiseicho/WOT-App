@@ -9,9 +9,9 @@ class App():
     # Define function to open web browser
     def open_url(self, event):
         index = self.listbox.curselection()[0]
-        website = self.listbox.get(index)
+        website = self.listbox.get(index).split(' Last update: ')[0]
         self.updateSingle(index)
-        #webbrowser.open_new_tab(website)
+        webbrowser.open_new_tab(website)
 
     def updateSingle(self, index):
         
@@ -53,7 +53,7 @@ class App():
             #text.insert(tk.END, content)
     def __init__(self):
         self.websites = {"https://www.google.com/",
-                    "https://www.example.com/jane",
+                    "https://slay.one/",
                     "https://www.example.com/michael",
                     "https://www.example.com/sarah",
                     "https://www.example.com/david"}
