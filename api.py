@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import time
 import requests
 import threading
+import os
 
 app = Flask(__name__)
 
@@ -31,6 +32,10 @@ class WebsiteChecker(threading.Thread):
             time.sleep(self.interval)
 
 websites = {}
+
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({'message': 'Welcome to the website checker API'}), 200
 
 @app.route('/websites', methods=['POST'])
 def add_website():
@@ -65,6 +70,7 @@ def get_all_websites():
         websites_list.append({'id': web_id, 'website': websites[web_id].website, 'status': websites[web_id].status})
     return jsonify({'websites': websites_list}), 200
 
+port = int(os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
-    app.run(threaded=True, debug=True)
+    app.run(host='0.0.0.0', threaded=True, port=port)
