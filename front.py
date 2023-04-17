@@ -44,13 +44,13 @@ class App():
             self.listbox.delete(0)
             self.listbox.insert(tk.END, website + ' Last update: ' + current_time)
             self.listbox.itemconfigure(tk.END, bg='#ed736d' if isDown else '#6ded73')
-        #with open('LOG.txt', 'r') as file:
+        with open('LOG.txt', 'r') as file:
 
             # Read the contents of the file
-            #content = file.read()
+            content = file.read()
             
-            #text.delete('0.1', tk.END)
-            #text.insert(tk.END, content)
+            self.text.delete('0.1', tk.END)
+            self.text.insert(tk.END, content)
     def __init__(self):
         self.websites = {"https://www.google.com/",
                     "https://slay.one/",
@@ -92,12 +92,12 @@ class App():
         self.text = tk.Text(self.window)
         self.text.pack(padx=10, pady=10, expand=True, fill=tk.Y)
 
-        #with open("log.txt", 'r') as file:
+        with open('LOG.txt', 'r') as file:
 
-            # Read the contents of the file
-        content = "Lorem ipsum"
-
-        self.text.insert(tk.END, content)
+            content = file.read()
+            
+            self.text.delete('0.1', tk.END)
+            self.text.insert(tk.END, content)
 
         self.button = tk.Button(self.window, text="Update", command=self.update)
         self.button.pack()
