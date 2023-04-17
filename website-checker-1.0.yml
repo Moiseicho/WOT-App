@@ -7,7 +7,7 @@ spec:
     app: website-checker
   ports:
   - name: http
-    port: 80
+    port: 5000
     targetPort: 5000
   type: LoadBalancer
 ---
@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
       - name: website-checker
-        image: niki4a/website-checker2.0:latest
+        image: niki4a/website-checker-3.0:latest
         ports:
         - containerPort: 5000
